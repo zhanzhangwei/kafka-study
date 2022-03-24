@@ -39,8 +39,8 @@ class MysqlClient(object):
         maxusage = 100
         setsession = None
         reset = True
-        host = HOST
-        port = PORT
+        host = MYSQL_HOST
+        port = MYSQL_PORT
         db = DATABASE
         user = USER
         passwd = PASSWORD
@@ -119,3 +119,6 @@ class MysqlClient(object):
             self._conn.autocommit()
         else:
             self._conn.rollback()
+
+
+mysql_client = MysqlClient()
