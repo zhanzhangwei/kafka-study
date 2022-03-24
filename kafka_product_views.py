@@ -1,6 +1,3 @@
-import sys
-from typing import Dict, Any, Union
-
 from confluent_kafka import Producer
 from random import randint
 import json
