@@ -1,6 +1,8 @@
 from confluent_kafka import Consumer
 from confluent_kafka.cimpl import TopicPartition
 
+from conf.common import IP
+
 
 class KafkaConsumerTool(object):
     def __init__(self, broker, topic, partition, offset):
@@ -12,19 +14,17 @@ class KafkaConsumerTool(object):
                 'auto.offset.reset': 'smallest'
             }
         }
-        print(config)
         self.client = Consumer(config)
-        TopicPartition(topic=topic, partition=partition, offset=offset)
+        # 指定消费分区跟偏移量
         self.client.assign([TopicPartition(topic=topic, partition=partition, offset=offset)])
         self.client.subscribe([topic])
 
 
 if __name__ == '__main__':
     topic = 'mytopic'
-    broker = "39.108.187.214:9092"
     partition = 5
     offset = 100
-    c = KafkaConsumerTool(topic=topic, broker=broker, partition=partition, offset=offset)
+    c = KafkaConsumerTool(topic=topic, broker=IP, partition=partition, offset=offset)
     while True:
         msg = c.client.poll(1)
         if msg is None:
