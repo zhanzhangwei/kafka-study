@@ -5,6 +5,8 @@ import json
 from confluent_kafka.admin import AdminClient
 from confluent_kafka.cimpl import NewPartitions
 
+from conf.common import IP
+
 
 class KafkaProducerTool(object):
 
@@ -39,9 +41,8 @@ class KafkaProducerTool(object):
 
 if __name__ == '__main__':
 
-    broker = "39.108.187.214:9092"
     topic = "mytopic"
-    p = KafkaProducerTool(topic, broker)
+    p = KafkaProducerTool(topic=topic, broker=IP)
     some_data_source = []
     for i in range(5):
         some_data_source.append({
@@ -50,7 +51,6 @@ if __name__ == '__main__':
             'sex': randint(30, 40),
             'partition': 2
         })
-    # NewPartitions({'topic': 'mytopic', 'new_total_cnt': 2, replica_assignment=None})
 
     for data in some_data_source:
         p.client.poll(0)
