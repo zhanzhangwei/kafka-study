@@ -56,3 +56,5 @@ if __name__ == '__main__':
         p.client.poll(0)
         p.send_msg(msg=json.dumps(data))
     p.client.flush()
+
+    print("test")
